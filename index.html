@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnityHostel | Premium Hostel & Mess Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Landing Page View -->
+    <div id="landing-view">
+        <nav class="navbar glass">
+            <div class="logo">
+                <i class="fa-solid fa-building-user"></i> UnityHostel
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+                <button class="btn btn-primary" onclick="toggleView('login')">Login</button>
+            </div>
+            <div class="mobile-menu-btn" onclick="toggleView('login')">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div class="hero-content">
+                <h1>The Future of <span class="gradient-text">Hostel Living</span></h1>
+                <p>Digitize your hostel & mess operations with our AI-powered cloud platform. Say goodbye to manual
+                    registers and food wastage.</p>
+                <div class="hero-btns">
+                    <button class="btn btn-primary" onclick="toggleView('login')">Get Started</button>
+                    <button class="btn btn-outline">Watch Demo</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://placehold.co/600x400/1e293b/fbbf24?text=Modern+Dashboard+UI" alt="Dashboard Preview">
+            </div>
+        </header>
+
+        <section id="features" class="features section">
+            <h2 class="section-title">Why Choose UnityHostel?</h2>
+            <div class="features-grid">
+                <div class="feature-card glass">
+                    <div class="icon-box"><i class="fa-solid fa-bed"></i></div>
+                    <h3>Smart Room Allocation</h3>
+                    <p>Automated room assignments and real-time bed availability tracking.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="icon-box"><i class="fa-solid fa-utensils"></i></div>
+                    <h3>Mess Management</h3>
+                    <p>Digital menu, meal booking, and AI-powered food wastage reduction.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="icon-box"><i class="fa-solid fa-credit-card"></i></div>
+                    <h3>Seamless Payments</h3>
+                    <p>Integrated payment gateway for fee collection and automated receipts.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="icon-box"><i class="fa-solid fa-bell"></i></div>
+                    <h3>Instant Alerts</h3>
+                    <p>Real-time notifications for fees, menu updates, and emergency alerts.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2026 UnityHostel. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Login View (Hidden by default) -->
+    <div id="login-view" class="hidden">
+        <div class="login-container">
+            <div class="login-card glass">
+                <div class="login-header">
+                    <h2>Welcome Back</h2>
+                    <p>Select your role to continue</p>
+                </div>
+
+                <div class="role-selector">
+                    <button class="role-btn active" onclick="selectRole('admin')">
+                        <i class="fa-solid fa-user-tie"></i> Admin
+                    </button>
+                    <button class="role-btn" onclick="selectRole('student')">
+                        <i class="fa-solid fa-user-graduate"></i> Student
+                    </button>
+                </div>
+
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <label>Username / ID</label>
+                        <input type="text" id="username" placeholder="Enter your ID" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="password" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    <p class="error-msg hidden" id="login-error">Invalid credentials</p>
+                </form>
+
+                <p class="back-link" onclick="toggleView('landing')">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Home
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard View (Hidden by default) -->
+    <div id="dashboard-view" class="hidden">
+        <div class="dashboard-container">
+            <aside class="sidebar glass">
+                <div class="sidebar-header">
+                    <i class="fa-solid fa-building-user"></i> <span>UnityHostel</span>
+                </div>
+                <ul class="sidebar-menu">
+                    <li id="nav-overview" class="active" onclick="switchTab('overview')"><i
+                            class="fa-solid fa-chart-pie"></i> Overview
+                    </li>
+                    <li id="nav-hostel" onclick="switchTab('hostel')"><i class="fa-solid fa-bed"></i> Hostel</li>
+                    <li id="nav-mess" onclick="switchTab('mess')"><i class="fa-solid fa-utensils"></i> Mess</li>
+                    <li id="nav-students" onclick="switchTab('students')"><i class="fa-solid fa-users"></i> Students
+                    </li>
+                    <li id="nav-payment" onclick="switchTab('payment')"><i class="fa-solid fa-credit-card"></i> Payment
+                    </li>
+                    <li id="nav-outing" onclick="switchTab('outing')"><i
+                            class="fa-solid fa-person-walking-arrow-right"></i> Outing</li>
+                    <li id="nav-complaints" onclick="switchTab('complaints')"><i
+                            class="fa-solid fa-screwdriver-wrench"></i> Complaints</li>
+                </ul>
+                <div class="sidebar-footer">
+                    <button class="btn btn-logout" onclick="toggleView('landing')"><i
+                            class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                </div>
+            </aside>
+
+            <!-- Sidebar Overlay for Mobile -->
+            <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+            <main class="main-content">
+                <header class="topbar glass">
+                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                        <button class="mobile-sidebar-toggle" onclick="toggleSidebar()">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <h2>Dashboard</h2>
+                    </div>
+                    <div class="user-profile">
+                        <span class="notification-bell"><i class="fa-solid fa-bell"></i></span>
+                        <div class="avatar" id="user-avatar">AD</div>
+                        <span id="user-name">Admin</span>
+                    </div>
+                </header>
+
+                <div id="content-area">
+                    <!-- Dynamic Content will be loaded here -->
+                    <div id="overview-tab" class="tab-content active">
+                        <div class="stats-grid">
+                            <div class="stat-card glass">
+                                <h3>Total Students</h3>
+                                <div class="value">450</div>
+                            </div>
+                            <div class="stat-card glass">
+                                <h3>Room Occupancy</h3>
+                                <div class="value">85%</div>
+                            </div>
+                            <div class="stat-card glass">
+                                <h3>Pending Fees</h3>
+                                <div class="value">₹ 1.2L</div>
+                            </div>
+                            <div class="stat-card glass">
+                                <h3>Active Complaints</h3>
+                                <div class="value">12</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="hostel-tab" class="tab-content hidden">
+                        <h2>Hostel Management</h2>
+                        <div class="rooms-grid">
+                            <!-- JS will populate rooms -->
+                        </div>
+                    </div>
+
+                    <div id="mess-tab" class="tab-content hidden">
+                        <h2>Mess Menu & Analytics</h2>
+                        <div class="mess-layout">
+                            <!-- Mess Workers Section (Admin Only) -->
+                            <div id="mess-workers-section" class="hidden glass"
+                                style="padding: 1.5rem; margin-bottom: 1.5rem;">
+                                <h3>Mess Workers Details</h3>
+                                <div class="table-container mt-2">
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Role</th>
+                                                <th>Shift</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="mess-workers-list"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="menu-card glass">
+                                <h3>Today's Menu</h3>
+                                <ul id="daily-menu">
+                                    <li>Breakfast: Idli, Sambar</li>
+                                    <li>Lunch: Rice, Dal, Veg Fry</li>
+                                    <li>Dinner: Chapati, Paneer</li>
+                                </ul>
+                            </div>
+                            <div class="wastage-card glass">
+                                <h3>Food Wastage Analytics (AI Prediction)</h3>
+                                <div class="chart-placeholder">
+                                    <div class="chart-bar" style="height: 60%;" data-label="Mon"></div>
+                                    <div class="chart-bar" style="height: 40%;" data-label="Tue"></div>
+                                    <div class="chart-bar" style="height: 80%;" data-label="Wed"></div>
+                                    <div class="chart-bar" style="height: 30%;" data-label="Thu"></div>
+                                    <div class="chart-bar" style="height: 50%;" data-label="Fri"></div>
+                                </div>
+                                <div style="margin-top: 1.5rem; text-align: center;">
+                                    <button class="btn btn-outline"
+                                        onclick="alert('Starting Face Scan for Attendance...')">
+                                        <i class="fa-solid fa-face-viewfinder"></i> Mark Attendance (Face Scan)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="students-tab" class="tab-content hidden">
+                        <h2>Student Details</h2>
+                        <div class="table-container glass">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Room</th>
+                                        <th>Dept</th>
+                                        <th>Year</th>
+                                        <th>Phone</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="all-students-list"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="payment-tab" class="tab-content hidden">
+                        <h2>Fees & Payments</h2>
+                        <div class="payment-grid">
+                            <div class="stat-card glass">
+                                <h3>Room Rent (Yearly)</h3>
+                                <div class="value">₹ 45,000</div>
+                                <span class="status-badge pending">Pending</span>
+                                <button class="btn btn-primary mt-2" onclick="openPaymentModal('Room Rent')">Pay
+                                    Now</button>
+                            </div>
+                            <div class="stat-card glass">
+                                <h3>Mess Bill (Feb)</h3>
+                                <div class="value">₹ 4,500</div>
+                                <span class="status-badge pending">Pending</span>
+                                <button class="btn btn-primary mt-2" onclick="openPaymentModal('Mess Bill')">Pay
+                                    Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="outing-tab" class="tab-content hidden">
+                        <h2>Outing Management</h2>
+                        <div class="outing-container">
+                            <!-- Student View -->
+                            <div id="student-outing-view" class="hidden">
+                                <div class="stat-card glass text-center">
+                                    <h3>Current Status</h3>
+                                    <div class="value" id="outing-status">In Hostel</div>
+                                    <div class="mt-4">
+                                        <button id="btn-go-out" class="btn btn-primary"
+                                            onclick="handleOutingAction('out')">Go Outing</button>
+                                        <button id="btn-return" class="btn btn-outline" disabled
+                                            onclick="handleOutingAction('in')">Return</button>
+                                    </div>
+                                </div>
+                                <h3 class="mt-4">Recent Logs</h3>
+                                <div class="outing-list" id="student-outing-list"></div>
+                            </div>
+
+                            <!-- Admin View -->
+                            <div id="admin-outing-view" class="hidden">
+                                <div class="table-container glass">
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Room</th>
+                                                <th>Status</th>
+                                                <th>Out Time</th>
+                                                <th>In Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="all-outing-list">
+                                            <!-- Populated by JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="complaints-tab" class="tab-content hidden">
+                        <h2>Complaints</h2>
+                        <button class="btn btn-primary" onclick="addComplaintMock()">+ New Complaint</button>
+                        <div class="complaints-list" id="complaints-list">
+                            <!-- JS will populate -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Room Details Modal -->
+    <div id="room-modal" class="modal hidden">
+        <div class="modal-content glass">
+            <span class="close-modal" onclick="closeRoomModal()">&times;</span>
+            <h2 id="modal-room-no">Room Details</h2>
+            <div class="table-container mt-2">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Dept</th>
+                            <th>Year</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-room-occupants"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
